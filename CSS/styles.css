@@ -45,9 +45,8 @@ header {
   flex-direction: row;
 }
 
-git canvas {
+canvas {
   border: 1px solid red;
-  position: absolute;
 }
 
 footer {
