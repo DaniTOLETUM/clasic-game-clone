@@ -40,14 +40,14 @@ header {
 }
 
 .gameplay {
+  border: 2px green solid;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px green solid
+  flex-direction: row;
 }
 
-canvas {
+git canvas {
   border: 1px solid red;
+  position: absolute;
 }
 
 footer {
