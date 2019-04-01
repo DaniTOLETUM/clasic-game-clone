@@ -2,7 +2,7 @@ var config = {
   type: Phaser.CANVAS,
   parent: 'gameplane',
   width: 512,
-  height: 448,
+  height: 480,
 
   physics: {
     default: 'arcade',
@@ -32,14 +32,13 @@ var scoreText;
 
 var game = new Phaser.Game(config);
 
-
 //Function that loads all images used in the game
 function preload() {
-  this.load.image('sky', '../phaser project/assets/sky.png');
+  this.load.image('sky', 'assets/sky.png');
   this.load.image('ground', 'assets/platform.png');
   this.load.image('star', 'assets/star.png');
   this.load.image('bomb', 'assets/bomb.png');
-  this.load.spritesheet('arthur', '../clasic-game-clone/Images/prueba.png', {
+  this.load.spritesheet('dude', '../clasic-game-clone/Images/prueba.png', {
     frameWidth: 64,
     frameHeight: 64
   });
@@ -49,7 +48,7 @@ function preload() {
 
 //Function that creates the game items
 function create() {
-  this.add.image(300, 300, 'sky');
+  this.add.image(400, 300, 'sky');
 
   platforms = this.physics.add.staticGroup();
 
@@ -60,14 +59,14 @@ function create() {
   platforms.create(750, 220, 'ground');
 
   //Player
-  player = this.physics.add.sprite(100, 450, 'arthur');
+  player = this.physics.add.sprite(100, 450, 'dude');
 
   player.setBounce(0.2);
   player.setCollideWorldBounds(true);
 
   this.anims.create({
     key: 'left',
-    frames: this.anims.generateFrameNumbers('arthur', {
+    frames: this.anims.generateFrameNumbers('dude', {
       start: 0,
       end: 3
     }),
@@ -78,7 +77,7 @@ function create() {
   this.anims.create({
     key: 'turn',
     frames: [{
-      key: 'arthur',
+      key: 'dude',
       frame: 8
     }],
     frameRate: 20
@@ -86,7 +85,7 @@ function create() {
 
   this.anims.create({
     key: 'right',
-    frames: this.anims.generateFrameNumbers('arthur', {
+    frames: this.anims.generateFrameNumbers('dude', {
       start: 0,
       end: 3
     }),
@@ -96,11 +95,11 @@ function create() {
 
   this.anims.create({
     key: 'up',
-    frames: this.anims.generateFrameNumbers('arthur', {
-      start: 9,
-    }),
+    frames: [{
+      key: 'dude',
+      frame: 9
+    }],
     frameRate: 10,
-    repeat: -1
   });
 
 
@@ -155,12 +154,13 @@ function update() { //actualiza los movimientos del player
     player.anims.play('right', true);
   } else {
     player.setVelocityX(0);
-
     player.anims.play('turn');
   }
 
   if (cursors.up.isDown && player.body.touching.down) {
-    player.setVelocityY(-330);
+    player.setVelocityY(-200);
+    player.anims.play('up');
+
   }
 }
 
