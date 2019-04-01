@@ -37,7 +37,7 @@ header {
 	justify-content: center;
 }
 
-.gameplane {
+#gameplane {
 	display: flex;
 	justify-content: center;
 	width: 60%;
@@ -55,6 +55,7 @@ header {
 	display: flex;
 	justify-content: center;
 }
+
 .restart-btn {
 	margin: 60% 0 0 0;
 	background-color: rgb(50, 50, 200);
@@ -72,6 +73,7 @@ header {
 	display: flex;
 	flex-direction: row;
 }
+
 
 canvas {
 	border: 1px solid red;
