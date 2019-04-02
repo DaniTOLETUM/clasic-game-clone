@@ -106,6 +106,8 @@ function animations() {
     arthur.srcY = arthur.duckRowRight * arthur.height;
   } else if (arthur.atkRight) {
     arthur.srcY = arthur.atkRowRight * arthur.height;
+  } else if (arthur.jumpRight) {
+    arthur.srcY = arthur.jumpRowRight * arthur.height;
   }
 }
 
@@ -116,8 +118,7 @@ function resetAnimations() {
   arthur.goRight = false;
   arthur.duckRight = false;
   arthur.atkRight = false;
-  // knight.jumpLeft = false;
-  // knight.jumpRight = false;
+  arthur.jumpRight = false;
 }
 
 
@@ -159,6 +160,9 @@ window.onkeydown = function (event) {
       break;
     case 32: // jumping key
       console.log('Im not going to jump now!');
+      event.preventDefault();
+      arthur.right = true;
+      arthur.jumpRight = true;
       break;
     case 65: //fight key
       console.log('Im ready, ¡FIGHT!');
