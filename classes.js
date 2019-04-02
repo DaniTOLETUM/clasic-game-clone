@@ -21,6 +21,10 @@ var leftPressed = false;
 var downPressed = false;
 // var firePressed = false;
 // var jumpPressed = false;
+var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
+audio.play();
+
+
 var backgroundPosY = document.getElementById('screengame').offsetLeft;
 console.log(backgroundPosY);
 var backgroundPosX = document.getElementById('screengame').offsetTop;
@@ -33,16 +37,36 @@ const arthur = {
   x: 225,
   y: 330,
   sheetWidth: 256,
-  sheetHeight: 1408,
+  sheetHeight: 448,
   width: 64,
   height: 64,
   colums: 4,
-  rows: 22,
-  currentFrame: 0
+  rows: 10,
+  currentFrame: 0,
+
+  stand: true,
+  goRight: false,
+  jumpRight: false,
+  atkRight: false,
+  dieRight: false,
+  goLeft: false,
+  atkLeft: false,
+  jumpLeft: false,
+
+  standRowRight: 0,
+  goRowRight: 1,
+  goRowLeft: 2,
+  jumpRowRight: 3,
+  jumpRowLeft: 4,
+  duckRowRight: 5,
+  duckRowLeft: 6,
+  atkRowRight: 7,
+  atkRowLeft: 8,
+  dieRowRight: 9,
 }
 
 var arthurImage = new Image();
-arthurImage.src = './Images/arthur.png';
+arthurImage.src = './Images/arthur_true.png';
 arthurImage.onload = function () {
   context.drawImage(arthurImage, arthur.x, arthur.y, arthur.width, arthur.height)
 }
@@ -59,8 +83,7 @@ function drawArthur() {
   updateFrame();
   context.drawImage(arthurImage, arthur.srcX, arthur.srcY, 64, 64, arthur.x, arthur.y, arthur.width, arthur.height);
 }
-var fps = 60;
-var interval = 1000 / fps;
+
 
 setInterval(() => {
   drawArthur();
