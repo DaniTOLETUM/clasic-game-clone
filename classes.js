@@ -76,17 +76,29 @@ window.onkeydown = function (event) {
     case 39:
       console.log("yay", event)
       event.preventDefault();
-      bgPos -= 25;
-      background.style.backgroundPosition = bgPos + 'px';
+      if (bgPos > (-6140)) {
+        bgPos -= 10;
+        background.style.backgroundPosition = bgPos + 'px';
+      };
       break;
     case 37:
       console.log('left mode ON', event);
       event.preventDefault();
       if (bgPos != 0) {
-        bgPos += 25;
+        bgPos += 10;
         background.style.backgroundPosition = bgPos + 'px';
       };
       break;
-
+    case 40:
+      console.log('sitting down!!');
+      break;
+    case 32:
+      console.log('Im not going to jump now!');
+      break;
+    case 65:
+      console.log('Im ready, ¡FIGHT!');
+      break;
+    default:
+      break;
   }
 }
