@@ -79,6 +79,7 @@ canvas {
 	border: 1px solid red;
 	background: url(../Images/background.png);
 	position: absolute;
+	background-repeat: no-repeat;
 }
 
 footer {
