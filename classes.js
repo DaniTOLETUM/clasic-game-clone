@@ -46,12 +46,16 @@ const arthur = {
 
   stand: true,
   goRight: false,
-  jumpRight: false,
-  atkRight: false,
-  dieRight: false,
+  left: false,
+  right: true,
   goLeft: false,
-  atkLeft: false,
+  jumpRight: false,
   jumpLeft: false,
+  duckRight: false,
+  duckLeft: false,
+  atkRight: false,
+  atkLeft: false,
+  dieRight: false,
 
   standRowRight: 0,
   goRowRight: 1,
@@ -81,6 +85,8 @@ function updateFrame() {
 
 function drawArthur() {
   updateFrame();
+  animations();
+  resetAnimations()
   context.drawImage(arthurImage, arthur.srcX, arthur.srcY, 64, 64, arthur.x, arthur.y, arthur.width, arthur.height);
 }
 
@@ -88,6 +94,24 @@ function drawArthur() {
 setInterval(() => {
   drawArthur();
 }, 100);
+
+
+function animations() {
+  arthur.srcX = arthur.currentFrame * arthur.width;
+  if (arthur.goRight) {
+    arthur.srcY = arthur.goRowRight * arthur.height;
+  } else if (arthur.goLeft) {
+    arthur.srcY = arthur.goRowLeft * arthur.height;
+  }
+}
+
+function resetAnimations() {
+  arthur.stand = arthur.right;
+  arthur.goLeft = false;
+  arthur.goRight = false;
+  // knight.jumpLeft = false;
+  // knight.jumpRight = false;
+}
 
 
 
@@ -103,6 +127,10 @@ window.onkeydown = function (event) {
         bgPos -= 10;
         background.style.backgroundPosition = bgPos + 'px';
       };
+      arthur.goRight = true;
+      arthur.right = true;
+      arthur.left = false;
+      console.log(arthur.goRight)
       break;
     case 37:
       console.log('left mode ON', event);
@@ -111,6 +139,10 @@ window.onkeydown = function (event) {
         bgPos += 10;
         background.style.backgroundPosition = bgPos + 'px';
       };
+      arthur.goLeft = true;
+      arthur.left = true;
+      arthur.right = false;
+
       break;
     case 40:
       console.log('sitting down!!');
