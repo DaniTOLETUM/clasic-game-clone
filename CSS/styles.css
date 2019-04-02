@@ -77,6 +77,8 @@ header {
 
 canvas {
 	border: 1px solid red;
+	background: url(../Images/background.png);
+	position: absolute;
 }
 
 footer {
