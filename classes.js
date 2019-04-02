@@ -1,9 +1,19 @@
+// Asking for the user's name
+var name = prompt("Please enter your name", "Harry Potter");
+
+
 //Setting the canvas
 const theCanvas = document.getElementById('screengame');
 const context = theCanvas.getContext('2d');
 
 // Setting background from DOM
 var background = document.getElementById('screengame');
+// Setting player info from DOM
+var namePlayer = document.getElementById('name-player');
+var nameScore = document.getElementById('score-player');
+var nameTime = document.getElementById('time-player');
+
+namePlayer.innerHTML = name;
 
 //=== VARIABLES DEFINITION ===
 //Coordenates background start
@@ -15,8 +25,7 @@ var leftPressed = false;
 var downPressed = false;
 // var firePressed = false;
 // var jumpPressed = false;
-var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
-audio.play();
+
 
 
 // To know the original position of the background image
@@ -92,8 +101,10 @@ function drawArthur() {
 // Set interval of animations
 setInterval(() => {
   drawArthur();
-}, 100);
+}, 70);
 
+var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
+audio.play();
 
 // Function that set animations depending of the state of the object Arthur
 function animations() {

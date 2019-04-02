@@ -1,0 +1,186 @@
+// === CLASSES DEFINITION === //
+// class Arthur {
+//   constructor() {}
+
+
+//   //Methods
+//   drawArthur() {
+//     var arthur = new Image();
+//     arthur.src = './Images/Arthur Stand/Arthur-stand1.png';
+//     arthur.onload = function () {
+//       context.drawImage(arthur, 225, 330, 64, 64);
+//     };
+//   }
+
+
+//   goRight() {
+//     console.log('Go Right');
+
+//     //   var srcX;
+//     //   var srcY;
+//     //   var x = 225;
+//     //   var y = 330;
+
+//     //   var sheetWidth = 256;
+//     //   var sheetHeight = 64;
+
+//     //   var colums = 4;
+//     //   var rows = 1;
+//     //   var width = sheetWidth / colums;
+//     //   var height = sheetHeight / rows;
+
+//     //   var arthur = new Image();
+//     //   arthur.src = './Images/arthur_right.png';
+
+//     //   var currentFrame = 0;
+
+//     //   function updateFrame() {
+//     //     currentFrame = ++currentFrame % colums;
+//     //     srcX = currentFrame * width;
+//     //     srcY = 0;
+//     //     context.clearRect(x, y, 64, 64);
+//     //   }
+
+//     //   function drawarthur() {
+//     //     updateFrame();
+//     //     // context.drawImage(background, backX, backY);
+//     //     context.drawImage(arthur, srcX, srcY, width, height, x, y, width, height);
+//     //   }
+
+//     //   setInterval(function () {
+//     //     drawarthur();
+//     //   }, 100);
+
+//     //   function drawLoop() {
+//     //     drawarthur();
+//     //     requestAnimationFrame(function () {
+//     //       drawLoop();
+//     //     });
+//     // }
+//   }
+
+
+//   goLeft() {
+//     console.log('Go Left');
+
+//     // var srcX;
+//     // var srcY;
+//     // var x = 225;
+//     // var y = 330;
+
+//     // var sheetWidth = 256;
+//     // var sheetHeight = 64;
+
+//     // var colums = 4;
+//     // var rows = 1;
+//     // var width = sheetWidth / colums;
+//     // var height = sheetHeight / rows;
+
+//     // var arthur = new Image();
+//     // arthur.src = './Images/arthur_left.png';
+
+//     // var currentFrame = 0;
+
+//    c
+
+//     // function drawarthur() {
+//     //   updateFrame();
+//     //   // context.drawImage(background, backX, backY);
+//     //   context.drawImage(arthur, srcX, srcY, width, height, 225, 330, width, height);
+//     // }
+
+//     // setInterval(function () {
+//     //   drawarthur();
+//     // }, 100);
+
+//     // function drawLoop() {
+//     //   drawarthur();
+//     //   requestAnimationFrame(function () {
+//     //     drawLoop();
+//     //   });
+//     // }
+//   }
+
+//   goJump() {}
+
+//   goDown() {
+
+//     // var arthur = new Image();
+//     // arthur.src = './Images/Arthur Down/Arthur down.png';
+//     // arthur.onload = function () {
+//     //   context.drawImage(arthur, 225, 330);
+//     // };
+//   }
+
+//   goAtack() {}
+// }
+
+
+// // CHARACTER LOADED
+// const c = new Arthur();
+// c.drawArthur();
+
+
+
+
+
+// ==== FUNCTION DRAW GAME ====
+// function draw() {
+// drawBackground();
+// // context.clearRect(225, 330, 64, 64);
+// c.drawArthur();
+
+// document.addEventListener('keydown', keyDownHandler, false);
+// document.addEventListener('keyup', keyUpHandler, false);
+
+// if (rightPressed) {
+//   console.log('right!!');
+//   background.style.backgroundPosition += -25 + 'px';
+//   c.goRight();
+// } else if (leftPressed) {
+//   console.log('Left!!');
+
+// c.goLeft()
+
+// }
+//drawing background
+// function drawBackground() {
+//   // background.onload = function () {
+//   context.drawImage(background, backX, backY);
+// };
+// }
+
+// Event Listener
+
+// function keyDownHandler(e) {
+//   if (e.keyCode == 39) {
+//     rightPressed = true;
+
+//     console.log('39!');
+//   } else if (e.keyCode == 37) {
+//     leftPressed = true;
+//   }
+// }
+
+// function keyUpHandler(e) {
+//   if (e.keyCode == 39) {
+//     rightPressed = false;
+//   } else if (e.keyCode == 37) {
+//     leftPressed = false;
+//   }
+// }
+// var count = 0;
+
+// function clbk() {
+//   console.log('running');
+//   draw();
+//   clbk();
+// }
+
+// setInterval(() => {
+//   drawingLoop();
+// }, 70);
+
+// window.requestAnimationFrame(clbk);
+
+
