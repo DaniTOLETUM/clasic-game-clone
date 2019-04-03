@@ -62,11 +62,20 @@ class Zombie {
     }
   }
 
+  // killedZombie() {
+  //   window.onkeydown = function (event) {
+  //     if (this.x > 222 && this.x < 262 && event.keyCode == 65) {
+  //       console.log('kill');
+  //     }
+  //   }
+  // }
+
 
   drawZombie() {
     //draw zombie
     this.updateFrameZombie();
     this.checkColision();
+    // this.killedZombie();
     // this.animationsEnemies();
     // context.drawImage(zombieImage, this.zombieSrcX, this.zombieSrcY, 64, 64, this.x, this.y, this.width, this.height);
     // zombieImage.onload = () => {
@@ -99,8 +108,8 @@ function randomDirection() {
     fromTo = 0; // Direction from left to right
     zombieX = 450;
   } else {
-    fromTo = 1; // Direction from right to left
-    zombieX = 10;
+    // fromTo = 1; // Direction from right to left
+    // zombieX = 10;
   }
   return {
     zombieX,
