@@ -16,20 +16,22 @@ namePlayer.innerHTML = name;
 
 //=== VARIABLES DEFINITION ===
 //Coordenates background start
-const backX = 0;
-const backY = 0;
-var rightPressed = false;
-var leftPressed = false;
-// var upPressed = false;
-var downPressed = false;
-// var firePressed = false;
-// var jumpPressed = false;
+// const backX = 0;
+// const backY = 0;
+// var rightPressed = false;
+// var leftPressed = false;
+// // var upPressed = false;
+// var downPressed = false;
+// // var firePressed = false;
+// // var jumpPressed = false;
 
 // To know the original position of the background image
 var backgroundPosY = document.getElementById('screengame').offsetLeft;
 console.log(backgroundPosY);
 var backgroundPosX = document.getElementById('screengame').offsetTop;
 console.log(backgroundPosX);
+
+// =======================================================================================================================================
 
 // === ARTHUR OBJECT === //
 const arthur = {
@@ -73,11 +75,11 @@ const arthur = {
 //draw arthur
 var arthurImage = new Image();
 arthurImage.src = './Images/arthur_true.png';
-arthurImage.onload = function() {
-	var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
-	audio.play();
-	context.drawImage(arthurImage, arthur.x, arthur.y, arthur.width, arthur.height);
-};
+// arthurImage.onload = function () {
+// 	var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
+// 	audio.play();
+// 	context.drawImage(arthurImage, arthur.x, arthur.y, arthur.width, arthur.height);
+// };
 
 //function to update de animation
 function updateFrame() {
@@ -95,10 +97,6 @@ function drawArthur() {
 	context.drawImage(arthurImage, arthur.srcX, arthur.srcY, 64, 64, arthur.x, arthur.y, arthur.width, arthur.height);
 }
 
-// Set interval of animations
-setInterval(() => {
-	drawArthur();
-}, 70);
 
 // Function that set animations depending of the state of the object Arthur
 function animations() {
@@ -127,7 +125,7 @@ function resetAnimations() {
 }
 
 var bgPos = 0; // variable that indicates the pixels to move the background. Initial 0
-window.onkeydown = function(event) {
+window.onkeydown = function (event) {
 	console.log(event);
 
 	//Swith statement to know what key is pressed and to change the states with this
@@ -177,3 +175,60 @@ window.onkeydown = function(event) {
 			break;
 	}
 };
+
+//============================================================
+// var zombieImage = new Image();
+// zombieImage.src = './Images/zombie_single.png';
+// var velocity = 8;
+
+// const zombie = {
+// 	srcX: 0,
+// 	srcY: 0,
+// 	x: 300,
+// 	y: 330,
+// 	// sheetWidth: 256,
+// 	// sheetHeight: 448,
+// 	width: 64,
+// 	height: 64,
+// };
+
+// zombieImage.onload = function () {
+// 	context.drawImage(zombieImage, zombie.x, zombie.y, zombie.width, zombie.height);
+// }
+
+// function updateFrameZombie() {
+// 	console.log('updating');
+// 	// context.clearRect(zombie.x, zombie.y, 64, 64);
+// 	zombie.x -= 8;
+// 	console.log(zombie.x, '  disminuye????');
+// }
+
+// function drawZombie() {
+// 	console.log('draw zombie');
+// 	updateFrameZombie();
+// 	// animations();
+// 	// resetAnimations();
+// 	zombieImage.onload = function () {
+// 		context.drawImage(zombieImage, zombie.srcX, zombie.srcY, 64, 64, zombie.x, zombie.y, zombie.width, zombie.height)
+// 	}
+// }
+
+//=============================================================
+
+// Set interval of animations
+// setInterval(() => {
+// 	drawArthur();
+// 	drawZombie();
+// }, 70);
+
+drawLoop()
+
+function drawLoop() {
+	setTimeout(function () {
+		requestAnimationFrame(drawLoop)
+		context.clearRect(0, 0, arthur.width, arthur.height)
+		// context.clearRect(0, 0, zombie.width, zombie.height)
+		drawArthur();
+		// drawZombie();
+	}, 150)
+}
