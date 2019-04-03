@@ -8,6 +8,7 @@ var zombieImageRight = new Image();
 var zombieImageLeft = new Image();
 zombieImageRight.src = './Images/zombie_single.png';
 zombieImageLeft.src = './Images/zombie_single_left.png';
+// 
 
 
 // zombieImage.onload = function () {
@@ -18,6 +19,7 @@ zombieImageLeft.src = './Images/zombie_single_left.png';
 class Zombie {
   constructor(zombieX, zombieDirection) {
     this.x = zombieX;
+    this.x2 = zombieX + this.width;
     this.direction = zombieDirection;
     this.y = 330;
     this.zombieSrcX = 0;
@@ -53,7 +55,7 @@ class Zombie {
 
   checkColision() {
     // console.log('cheking colision')
-    if (this.x == 210) {
+    if (this.x2 == 238 || this.x == 222) {
       console.log('ooooooooooooooooooooooooooooooooooooooo')
       this.isCrashed = true;
       console.log(this.isCrashed, 'colision!!!!!!');

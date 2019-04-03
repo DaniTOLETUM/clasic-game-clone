@@ -28,6 +28,7 @@ const arthur = {
 	srcY: 0,
 	x: 225,
 	y: 330,
+	x2: 291,
 	sheetWidth: 256,
 	sheetHeight: 448,
 	width: 64,
@@ -64,6 +65,7 @@ const arthur = {
 //draw arthur
 var arthurImage = new Image();
 arthurImage.src = './Images/arthur_true.png';
+arthurImage.style.zIndex = '1';
 // arthurImage.onload = function () {
 var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
 audio.play();
@@ -89,6 +91,7 @@ function drawArthur() {
 	animations();
 	resetAnimations();
 	context.drawImage(arthurImage, arthur.srcX, arthur.srcY, 64, 64, arthur.x, arthur.y, arthur.width, arthur.height);
+	arthurImage.style.zIndex = '1';
 }
 
 
