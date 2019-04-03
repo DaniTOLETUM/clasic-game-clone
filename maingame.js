@@ -259,10 +259,18 @@ class Zombie {
 
 	checkColision() {
 		// console.log('cheking colision')
+		if (this.x > 222 && this.x < 262 && arthur.atkRight == true) {
+			console.log('kill');
+			var newZombie = 0;
+			context.drawImage(this.zombieKilledImage, this.x, this.y);
+			this.zombieImagen = zombieExplosion;
+			context.clearRect(this.x, this.y, 70, 70);
+		}
 		if (this.x2 == 238 || this.x == 222) {
 			console.log('ooooooooooooooooooooooooooooooooooooooo')
 			this.isCrashed = true;
 			console.log(this.isCrashed, 'colision!!!!!!');
+			// alert('You lose!!');
 		}
 	}
 
@@ -307,7 +315,7 @@ class Zombie {
 
 
 var newZombie = new Zombie();
-newZombie.drawZombie();
+// newZombie.drawZombie();
 
 function randomDirection() {
 	var zombieX;
