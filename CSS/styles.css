@@ -74,7 +74,6 @@ header {
 	flex-direction: row;
 }
 
-
 canvas {
 	/* border: 2px solid rgb(173, 60, 42);
 	background: #111845a6;
@@ -134,7 +133,6 @@ footer {
 	color: #dfdff9;
 	font-family: 'Press Start 2P', sans-serif;
 	text-shadow: 3px 3px 10px #df0f0f;
-
 }
 
 /* The Close Button */
