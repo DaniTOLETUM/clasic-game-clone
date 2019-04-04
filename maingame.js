@@ -91,10 +91,6 @@ const arthur = {
 //draw arthur
 var arthurImage = new Image();
 arthurImage.src = './Images/arthur_true.png';
-// arthurImage.onload = function () {
-
-// 	context.drawImage(arthurImage, arthur.x, arthur.y, arthur.width, arthur.height);
-// };
 
 //function to update de animation
 function updateFrame() {
@@ -145,61 +141,9 @@ function resetAnimations() {
 }
 
 var bgPos = 0; // variable that indicates the pixels to move the background. Initial 0
-window.onkeydown = function(event) {
-	// console.log(event);
-
-	//Swith statement to know what key is pressed and to change the states with this
-	switch (event.keyCode) {
-		case 39: //right key
-			// console.log('yay', event);
-			event.preventDefault();
-			if (bgPos > -6140) {
-				bgPos -= 10;
-				background.style.backgroundPosition = bgPos + 'px';
-			}
-			arthur.goRight = true;
-			arthur.right = true;
-			arthur.left = false;
-			// console.log(arthur.goRight);
-			break;
-		case 37: //left key
-			// console.log('left mode ON', event);
-			event.preventDefault();
-			if (bgPos != 0) {
-				bgPos += 10;
-				background.style.backgroundPosition = bgPos + 'px';
-			}
-			arthur.goLeft = true;
-			arthur.left = true;
-			arthur.right = false;
-			break;
-		case 40: //down key
-			// console.log('sitting down!!');
-			event.preventDefault();
-			arthur.right = true;
-			arthur.duckRight = true;
-			break;
-		case 32: // jumping key
-			// console.log('Im not going to jump now!');
-			event.preventDefault();
-			arthur.right = true;
-			arthur.jumpRight = true;
-			break;
-		case 65: //fight key
-			// console.log('Im ready, ¡FIGHT!');
-			event.preventDefault();
-			arthur.right = true;
-			arthur.atkRight = true;
-			break;
-		default:
-			break;
-	}
-};
-
-// drawLoop();
 
 function drawLoop() {
-	setTimeout(function() {
+	setTimeout(function () {
 		// context.clearRect(0, 0, arthur.width, arthur.height);
 		requestAnimationFrame(drawLoop);
 		drawArthur();
@@ -248,7 +192,6 @@ function zombiesInAction() {
 		}
 
 		checkColision() {
-			// console.log('cheking colision')
 			if (this.x > 222 && this.x < 232 && arthur.atkRight == true) {
 				console.log('kill');
 				this.velocity = 0;
@@ -260,7 +203,7 @@ function zombiesInAction() {
 				console.log('ooooooooooooooooooooooooooooooooooooooo');
 				this.isCrashed = true;
 				console.log(this.isCrashed, 'colision!!!!!!');
-				// alert('You lose!!');
+				alert('You lose!!');
 			}
 		}
 
@@ -276,7 +219,6 @@ function zombiesInAction() {
 		}
 
 		drawZombie() {
-			//draw zombie
 			this.updateFrameZombie();
 			this.checkColision();
 			this.killedZombie();
@@ -342,3 +284,50 @@ function zombiesInAction() {
 		newZombie.drawZombie();
 	}, 70);
 }
+
+window.onkeydown = function (event) {
+	// console.log(event);
+
+	//Swith statement to know what key is pressed and to change the states with this
+	switch (event.keyCode) {
+		case 39: //right key
+			// console.log('yay', event);
+			event.preventDefault();
+			if (bgPos > -6140) {
+				bgPos -= 10;
+				background.style.backgroundPosition = bgPos + 'px';
+			}
+			arthur.goRight = true;
+			arthur.right = true;
+			arthur.left = false;
+			break;
+		case 37: //left key
+			event.preventDefault();
+			if (bgPos != 0) {
+				bgPos += 10;
+				background.style.backgroundPosition = bgPos + 'px';
+			}
+			arthur.goLeft = true;
+			arthur.left = true;
+			arthur.right = false;
+			newZombie.velocity = -2;
+			break;
+		case 40: //down key
+			event.preventDefault();
+			arthur.right = true;
+			arthur.duckRight = true;
+			break;
+		case 32: // jumping key
+			event.preventDefault();
+			arthur.right = true;
+			arthur.jumpRight = true;
+			break;
+		case 65: //fight key
+			event.preventDefault();
+			arthur.right = true;
+			arthur.atkRight = true;
+			break;
+		default:
+			break;
+	}
+};
