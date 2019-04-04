@@ -34,8 +34,13 @@ var background = document.getElementById('screengame');
 var nameScore = document.getElementById('score-player');
 var nameTime = document.getElementById('time-player');
 // Setting video from DOM
-var videoIntro = document.getElementById('video');
-videoIntro.play();
+// var videoIntro = document.getElementById('video');
+// videoIntro.play();
+
+// Get the modal of end Game
+var modalEnd = document.getElementById('Modal-end');
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
 // EVENT CLICK START BUTTON
 startGameBtn.onclick = startGame;
@@ -237,10 +242,25 @@ function zombiesinAction() {
 			}
 			if (this.x2 == 238 || this.x == 222) {
 				arthurScream.play();
+				arthurScream = 0;
+				arthurImage = 0;
+				zombieImage = 0;
 				console.log('ooooooooooooooooooooooooooooooooooooooo');
 				this.isCrashed = true;
 				console.log(this.isCrashed, 'colision!!!!!!');
-				alert('You lose!!');
+				// alert('You lose!!');
+				modalEnd.style.display = "block";
+				// When the user clicks on <span> (x), close the modal
+				span.onclick = function () {
+					modalEnd.style.display = "none";
+					location.reload(true);
+				}
+				// When the user clicks anywhere outside of the modal, close it
+				window.onclick = function (event) {
+					if (event.target == modal) {
+						modalEnd.style.display = "none";
+					}
+				}
 			}
 		}
 
