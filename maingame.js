@@ -21,6 +21,11 @@ zombieExplosion.src = './Images/zombie-killed.png';
 var zombieImage = new Image();
 zombieImage.src = './Images/zombies.png';
 
+var arthurScream = new Audio('./Audio/arthur-scream.wav');
+var swordSound = new Audio('./Audio/sword.flac');
+var arthurJumps = new Audio('./Audio/arthur-jump.wav');
+var zombieDies = new Audio('./Audio/zombie-dies.wav');
+
 
 var points;
 
@@ -38,8 +43,8 @@ function startGame() {
 	console.log('start game yeah!');
 	restartGame();
 	playerName(); // Asking for the user's name
-	var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
-	audio.play(); //starts audio game
+	var musicBackground = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
+	musicBackground.play(); //starts audio game
 	drawLoop(); // starts Arthur loop
 	var points = 0;
 }
@@ -219,6 +224,7 @@ class Zombie {
 			this.velocity = 0;
 			context.drawImage(this.zombieKilledImage, this.x, this.y);
 			this.zombieImagen = zombieExplosion;
+			zombieDies.play();
 			context.clearRect(this.x, this.y, 100, 70);
 			points += 100;
 			nameScore.innerHTML = points;
@@ -227,6 +233,7 @@ class Zombie {
 			this.x = -70;
 		}
 		if (this.x2 == 238 || this.x == 222) {
+			arthurScream.play();
 			console.log('ooooooooooooooooooooooooooooooooooooooo');
 			this.isCrashed = true;
 			console.log(this.isCrashed, 'colision!!!!!!');
@@ -355,11 +362,13 @@ window.onkeydown = function (event) {
 			event.preventDefault();
 			arthur.right = true;
 			arthur.jumpRight = true;
+			arthurJumps.play();
 			break;
 		case 65: //fight key
 			event.preventDefault();
 			arthur.right = true;
 			arthur.atkRight = true;
+			swordSound.play();
 			break;
 		default:
 			break;
