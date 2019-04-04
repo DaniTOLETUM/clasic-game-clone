@@ -1,18 +1,43 @@
-// Asking for the user's name
-var name = prompt('Please enter your name', 'Harry Potter');
-
 //Setting the canvas
 const theCanvas = document.getElementById('screengame');
 const context = theCanvas.getContext('2d');
 
+// SETTING VARIABLES
+var startGameBtn = document.getElementById('restart-game');
+console.log(startGameBtn, 'ey');
+
+var zombieImageRight = new Image();
+var zombieImageLeft = new Image();
+var zombieExplosion = new Image();
+zombieImageRight.src = './Images/zombie_single.png';
+zombieImageLeft.src = './Images/zombie_single_left.png';
+zombieExplosion.src = './Images/zombie-killed.png';
+
+// EVENT CLICK START BUTTON
+startGameBtn.onclick = startGame;
+
+// START GAME FUNCTION
+function startGame() {
+	console.log('start game yeah!');
+	playerName(); // Asking for the user's name
+	var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
+	audio.play(); //starts audio game
+	drawLoop(); // starts Arthur loop
+
+	zombiesInAction(); // starts zombies loop
+}
+
+// FUNCTION PLAYER NAME
+function playerName() {
+	var name = prompt('Please enter your name', 'Harry Potter');
+	var namePlayer = document.getElementById('name-player');
+	namePlayer.innerHTML = name;
+}
 // Setting background from DOM
 var background = document.getElementById('screengame');
 // Setting player info from DOM
-var namePlayer = document.getElementById('name-player');
 var nameScore = document.getElementById('score-player');
 var nameTime = document.getElementById('time-player');
-
-namePlayer.innerHTML = name;
 
 // To know the original position of the background image
 var backgroundPosY = document.getElementById('screengame').offsetLeft;
@@ -20,7 +45,8 @@ console.log(backgroundPosY);
 var backgroundPosX = document.getElementById('screengame').offsetTop;
 console.log(backgroundPosX);
 
-// =======================================================================================================================================
+// ========================================== ARTHUR =====================================================
+// ========================================== ARTHUR =====================================================
 
 // === ARTHUR OBJECT === //
 const arthur = {
@@ -66,8 +92,7 @@ const arthur = {
 var arthurImage = new Image();
 arthurImage.src = './Images/arthur_true.png';
 // arthurImage.onload = function () {
-var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
-audio.play();
+
 // 	context.drawImage(arthurImage, arthur.x, arthur.y, arthur.width, arthur.height);
 // };
 
@@ -92,7 +117,6 @@ function drawArthur() {
 	context.drawImage(arthurImage, arthur.srcX, arthur.srcY, 64, 64, arthur.x, arthur.y, arthur.width, arthur.height);
 	arthurImage.style.zIndex = '1';
 }
-
 
 // Function that set animations depending of the state of the object Arthur
 function animations() {
@@ -121,7 +145,7 @@ function resetAnimations() {
 }
 
 var bgPos = 0; // variable that indicates the pixels to move the background. Initial 0
-window.onkeydown = function (event) {
+window.onkeydown = function(event) {
 	// console.log(event);
 
 	//Swith statement to know what key is pressed and to change the states with this
@@ -172,182 +196,149 @@ window.onkeydown = function (event) {
 	}
 };
 
-drawLoop()
+// drawLoop();
 
 function drawLoop() {
-	setTimeout(function () {
-		// context.clearRect(0, 0, zombie.width, zombie.height)
-		requestAnimationFrame(drawLoop)
+	setTimeout(function() {
+		// context.clearRect(0, 0, arthur.width, arthur.height);
+		requestAnimationFrame(drawLoop);
 		drawArthur();
-		// drawZombie();
-	}, 150)
+	}, 150);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Variables
-
-var zombieImageRight = new Image();
-var zombieImageLeft = new Image();
-var zombieExplosion = new Image();
-zombieImageRight.src = './Images/zombie_single.png';
-zombieImageLeft.src = './Images/zombie_single_left.png';
-zombieExplosion.src = './Images/zombie-killed.png';
-// 
-
-
-// zombieImage.onload = function () {
-
-
+// =========================================== ZOMBIE =====================================================
+// =========================================== ZOMBIE =====================================================
 
 // === ZOMBIE OBJECT === //
-class Zombie {
-	constructor(zombieX, zombieDirection) {
-		this.x = zombieX;
-		this.x2 = zombieX + this.width;
-		this.direction = zombieDirection;
-		this.y = 330;
-		this.zombieSrcX = 0;
-		this.zombieSrcy = 0;
-		this.width = 64;
-		this.height = 64;
-		this.zombieRow = 4;
-		this.zombieColums = 4
-		this.velocity = 4;
-		this.isCrashed = false;
-		this.currentFrame = 0;
-		this.zombieGoLeft = 0;
-		this.zombieGoRight = 1;
-		this.ZombieDieLeft = 2;
-		this.ZombieDieRight = 3;
-		this.zombieImagen = this.direction ? zombieImageLeft : zombieImageRight;
-		this.zombieKilledImage = zombieExplosion;
-	}
-
-	//Function Update Frame
-	updateFrameZombie() {
-		// console.log('updating frame');
-		// this.currentFrame = ++this.currentFrame % this.zombieColums;
-		// this.zombieSrcX = this.currentFrame * this.width;
-		// this.zombieSrcY = 0;
-
-		if (this.direction) {
-			this.x += this.velocity;
-		} else {
-			this.x -= this.velocity;
+function zombiesInAction() {
+	class Zombie {
+		constructor(zombieX, zombieDirection) {
+			this.x = zombieX;
+			this.x2 = zombieX + this.width;
+			this.direction = zombieDirection;
+			this.y = 330;
+			this.zombieSrcX = 0;
+			this.zombieSrcy = 0;
+			this.width = 64;
+			this.height = 64;
+			this.zombieRow = 4;
+			this.zombieColums = 4;
+			this.velocity = 4;
+			this.isCrashed = false;
+			this.currentFrame = 0;
+			this.zombieGoLeft = 0;
+			this.zombieGoRight = 1;
+			this.ZombieDieLeft = 2;
+			this.ZombieDieRight = 3;
+			this.zombieImagen = this.direction ? zombieImageLeft : zombieImageRight;
+			this.zombieKilledImage = zombieExplosion;
 		}
-		context.clearRect(this.x, this.y, 64, 64);
-	}
+		//Function Update Frame
+		updateFrameZombie() {
+			// console.log('updating frame');
+			// this.currentFrame = ++this.currentFrame % this.zombieColums;
+			// this.zombieSrcX = this.currentFrame * this.width;
+			// this.zombieSrcY = 0;
 
-	checkColision() {
-		// console.log('cheking colision')
-		if (this.x > 222 && this.x < 262 && arthur.atkRight == true) {
-			console.log('kill');
-			var newZombie = 0;
-			context.drawImage(this.zombieKilledImage, this.x, this.y);
-			this.zombieImagen = zombieExplosion;
-			context.clearRect(this.x, this.y, 70, 70);
+			if (this.direction) {
+				this.x += this.velocity;
+			} else {
+				this.x -= this.velocity;
+			}
+			context.clearRect(this.x, this.y, 64, 64);
 		}
-		if (this.x2 == 238 || this.x == 222) {
-			console.log('ooooooooooooooooooooooooooooooooooooooo')
-			this.isCrashed = true;
-			console.log(this.isCrashed, 'colision!!!!!!');
-			// alert('You lose!!');
+
+		checkColision() {
+			// console.log('cheking colision')
+			if (this.x > 222 && this.x < 232 && arthur.atkRight == true) {
+				console.log('kill');
+				this.velocity = 0;
+				context.drawImage(this.zombieKilledImage, this.x, this.y);
+				this.zombieImagen = zombieExplosion;
+				context.clearRect(this.x, this.y, 100, 70);
+			}
+			if (this.x2 == 238 || this.x == 222) {
+				console.log('ooooooooooooooooooooooooooooooooooooooo');
+				this.isCrashed = true;
+				console.log(this.isCrashed, 'colision!!!!!!');
+				// alert('You lose!!');
+			}
 		}
-	}
 
-	killedZombie() {
-		console.log('calling killerrrr')
-		if (this.x > 222 && this.x < 262 && arthur.atkRight == true) {
-			console.log('kill');
-			var newZombie = 0;
-			context.drawImage(this.zombieKilledImage, this.x, this.y);
-			this.zombieImagen = zombieExplosion;
-			context.clearRect(this.x, this.y, 70, 70);
-
+		killedZombie() {
+			console.log('calling killerrrr');
+			if (this.x > 222 && this.x < 262 && arthur.atkRight == true) {
+				console.log('kill');
+				var newZombie = 0;
+				context.drawImage(this.zombieKilledImage, this.x, this.y);
+				this.zombieImagen = zombieExplosion;
+				context.clearRect(this.x, this.y, 70, 70);
+			}
 		}
+
+		drawZombie() {
+			//draw zombie
+			this.updateFrameZombie();
+			this.checkColision();
+			this.killedZombie();
+			// this.animationsEnemies();
+			// context.drawImage(zombieImage, this.zombieSrcX, this.zombieSrcY, 64, 64, this.x, this.y, this.width, this.height);
+			// zombieImage.onload = () => {
+			// console.log('image drawing');
+			context.drawImage(this.zombieImagen, this.x, this.y);
+			// };
+		}
+
+		// animationsEnemies() {
+		//   console.log(' animation mode ON');
+		//   this.zombieSrcX = this.currentFrame * this.width;
+		//   if (this.direction == 1) {
+		//     this.zombieSrcY = this.zombieGoLeft * this.height;
+		//   } else {
+		//     this.zombieSrcY = this.zombieGoRight * this.height;
+		//   }
+		// }
 	}
 
-
-	drawZombie() {
-		//draw zombie
-		this.updateFrameZombie();
-		this.checkColision();
-		this.killedZombie();
-		// this.animationsEnemies();
-		// context.drawImage(zombieImage, this.zombieSrcX, this.zombieSrcY, 64, 64, this.x, this.y, this.width, this.height);
-		// zombieImage.onload = () => {
-		// console.log('image drawing');
-		context.drawImage(this.zombieImagen, this.x, this.y);
-		// };
-	};
-
-
-	// animationsEnemies() {
-	//   console.log(' animation mode ON');
-	//   this.zombieSrcX = this.currentFrame * this.width;
-	//   if (this.direction == 1) {
-	//     this.zombieSrcY = this.zombieGoLeft * this.height;
-	//   } else {
-	//     this.zombieSrcY = this.zombieGoRight * this.height;
-	//   }
-	// }
-
-}
-
-
-var newZombie = new Zombie();
-// newZombie.drawZombie();
-
-function randomDirection() {
-	var zombieX;
-	// Random function to know direction and X of each zombie
-	var fromTo = Math.random();
-	if (fromTo < .5) {
-		fromTo = 0; // Direction from left to right
-		zombieX = 450;
-	} else {
-		// fromTo = 1; // Direction from right to left
-		// zombieX = 10;
-	}
-	return {
-		zombieX,
-		fromTo
-	};
-}
-
-
-
-// Set interval of animations
-setInterval(() => {
-	// Call to a random direction
-	const val = randomDirection();
-	//call to draw new Zombie
-	newZombie = new Zombie(val.zombieX, val.fromTo);
+	var newZombie = new Zombie();
 	// newZombie.drawZombie();
-}, 4000);
 
+	function randomDirection() {
+		var zombieX;
+		// Random function to know direction and X of each zombie
+		var fromTo = Math.random();
+		if (fromTo < 0.5) {
+			fromTo = 0; // Direction from left to right
+			zombieX = 450;
+		} else {
+			// fromTo = 1; // Direction from right to left
+			// zombieX = 10;
+		}
+		return {
+			zombieX,
+			fromTo
+		};
+	}
 
-setInterval(() => {
-	// call to draw new zombie
-	newZombie.drawZombie();
-}, 70)
-// };
+	// Set interval of animations
+	setInterval(() => {
+		// Call to a random direction
+		const val = randomDirection();
+		//call to draw new Zombie
+		newZombie = new Zombie(val.zombieX, val.fromTo);
+		// newZombie.drawZombie();
+	}, 4000);
+
+	// drawZombieLoop();
+	// function drawZombieLoop() {
+	// 	setTimeout(function() {
+	// 		requestAnimationFrame(drawZombieLoop);
+	// 		newZombie.drawZombie();
+	// 		context.clearRect(0, 0, Zombie.width, Zombie.height);
+	// 	}, 70);
+
+	setInterval(() => {
+		// call to draw new zombie
+		// context.clearRect(0, 0, Zombie.width, Zombie.height);
+		newZombie.drawZombie();
+	}, 70);
+}
