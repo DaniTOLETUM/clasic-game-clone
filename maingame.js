@@ -13,18 +13,34 @@ zombieImageRight.src = './Images/zombie_single.png';
 zombieImageLeft.src = './Images/zombie_single_left.png';
 zombieExplosion.src = './Images/zombie-killed.png';
 
+var points;
+
+// Setting background from DOM
+var background = document.getElementById('screengame');
+// Setting player info from DOM
+var nameScore = document.getElementById('score-player');
+var nameTime = document.getElementById('time-player');
+
 // EVENT CLICK START BUTTON
 startGameBtn.onclick = startGame;
 
 // START GAME FUNCTION
 function startGame() {
 	console.log('start game yeah!');
+	restartGame();
 	playerName(); // Asking for the user's name
 	var audio = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
 	audio.play(); //starts audio game
 	drawLoop(); // starts Arthur loop
 
 	zombiesInAction(); // starts zombies loop
+	var points = 0;
+}
+
+//FUNCTION RESTART GAME
+function restartGame() {
+	points = 0;
+	nameScore.innerHTML = points;
 }
 
 // FUNCTION PLAYER NAME
@@ -33,11 +49,6 @@ function playerName() {
 	var namePlayer = document.getElementById('name-player');
 	namePlayer.innerHTML = name;
 }
-// Setting background from DOM
-var background = document.getElementById('screengame');
-// Setting player info from DOM
-var nameScore = document.getElementById('score-player');
-var nameTime = document.getElementById('time-player');
 
 // To know the original position of the background image
 var backgroundPosY = document.getElementById('screengame').offsetLeft;
@@ -198,6 +209,11 @@ function zombiesInAction() {
 				context.drawImage(this.zombieKilledImage, this.x, this.y);
 				this.zombieImagen = zombieExplosion;
 				context.clearRect(this.x, this.y, 100, 70);
+				points += 100;
+				nameScore.innerHTML = points;
+				console.log(nameScore);
+				console.log(points);
+				this.x = -70;
 			}
 			if (this.x2 == 238 || this.x == 222) {
 				console.log('ooooooooooooooooooooooooooooooooooooooo');
@@ -252,8 +268,8 @@ function zombiesInAction() {
 			fromTo = 0; // Direction from left to right
 			zombieX = 450;
 		} else {
-			// fromTo = 1; // Direction from right to left
-			// zombieX = 10;
+			fromTo = 0; // fromTo = 1; // Zombies in the other direction
+			zombieX = 450;
 		}
 		return {
 			zombieX,

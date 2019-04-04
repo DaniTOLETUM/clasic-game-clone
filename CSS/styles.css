@@ -79,9 +79,9 @@ canvas {
 	/* border: 2px solid rgb(173, 60, 42);
 	background: #111845a6;
 	box-shadow: 0 10px 10px rgb(223, 15, 15); */
-	-webkit-box-shadow: 5px 5px 22px 6px rgba(223, 15, 15, 0.58);
-	-moz-box-shadow: 5px 5px 22px 6px rgba(223, 15, 15, 0.58);
-	box-shadow: 5px 5px 22px 6px rgba(223, 15, 15, 0.58);
+	-webkit-box-shadow: 5px 5px 22px 6px rgb(23, 32, 90);
+	-moz-box-shadow: 5px 5px 22px 6px rgb(23, 32, 90);
+	box-shadow: 5px 5px 22px 6px rgb(23, 32, 90);
 	background: url(../Images/background.png);
 	position: absolute;
 	background-repeat: no-repeat;
