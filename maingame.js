@@ -445,13 +445,13 @@ function zombiesinAction() {
 		}
 	};
 
-	// function endingGame() {
-	// 	console.log('ENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
-	// 	musicBackground.pause();
-	// 	arthurScream = 0;
-	// 	theCanvas.style.display = 'none';
-	// 	finalVideo.style.display = 'block';
-	// 	arthurImage = 0;
-	// 	zombieImage = 0;
-	// }
+	function endingGame() {
+		console.log('ENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+		musicBackground.pause();
+		arthurScream = 0;
+		theCanvas.style.display = 'none';
+		finalVideo.style.display = 'block';
+		arthurImage = 0;
+		zombieImage = 0;
+	}
 }
