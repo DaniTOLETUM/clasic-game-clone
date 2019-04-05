@@ -69,6 +69,7 @@ function startGame() {
 	musicBackground.play(); //starts audio game
 	var points = 0;
 	videoIntro.style.display = 'none';
+	videoIntro.parentNode.removeChild(videoIntro);
 }
 
 //FUNCTION RESTART GAME
