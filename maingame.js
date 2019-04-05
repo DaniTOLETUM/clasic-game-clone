@@ -41,6 +41,22 @@ var nameTime = document.getElementById('time-player');
 var modalEnd = document.getElementById('Modal-end');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+// Get modal to insert name
+var modalName = document.getElementById("Modal-name");
+var name = document.getElementById("new-name");
+// Get namePlayer from DOM
+var namePlayer = document.getElementById('name-player');
+// Get video intro div from DOM
+var videoIntro = document.getElementById('video-intro');
+// Get video intro element
+var videoIntroElement = document.getElementById('video1');
+
+
+// IF Video Intro ends
+videoIntroElement.onended = function (e) {
+	startGame();
+};
+
 
 // EVENT CLICK START BUTTON
 startGameBtn.onclick = startGame;
@@ -48,27 +64,46 @@ startGameBtn.onclick = startGame;
 // START GAME FUNCTION
 function startGame() {
 	console.log('start game yeah!');
-	restartGame();
 	playerName(); // Asking for the user's name
 	var musicBackground = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
 	musicBackground.play(); //starts audio game
-	drawLoop(); // starts Arthur loop
 	var points = 0;
-	zombiesinAction();
+	videoIntro.style.display = 'none';
 }
 
 //FUNCTION RESTART GAME
 function restartGame() {
 	points = 0;
 	nameScore.innerHTML = points;
+	drawLoop(); // starts Arthur loop
+	zombiesinAction();
 }
 
 // FUNCTION PLAYER NAME
 function playerName() {
-	var name = prompt('Please enter your name', 'Harry Potter');
-	var namePlayer = document.getElementById('name-player');
-	namePlayer.innerHTML = name;
+	modalName.style.display = "block";
+	// Execute a function when the user releases a key on the keyboard
+	name.addEventListener("keyup", function (event) {
+		console.log('llegamos hasta aqui');
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			name = name.value;
+			namePlayer.innerHTML = name;
+			modalName.style.display = 'none';
+			displayCanvas();
+			restartGame();
+		}
+	});
+
+
+
+
 }
+
+// Function to display Canvas
+function displayCanvas() {
+	theCanvas.style.display = 'block';
+};
 
 
 // ========================================== ARTHUR =====================================================
