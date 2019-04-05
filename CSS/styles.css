@@ -159,3 +159,13 @@ footer {
 #video-intro {
 	display: block;
 }
+
+#video-end {
+	display: none;
+}
+
+
+.videoend {
+	width: 100%;
+
+}

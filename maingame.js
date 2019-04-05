@@ -33,17 +33,16 @@ var background = document.getElementById('screengame');
 // Setting player info from DOM
 var nameScore = document.getElementById('score-player');
 var nameTime = document.getElementById('time-player');
-// Setting video from DOM
-// var videoIntro = document.getElementById('video');
-// videoIntro.play();
+// Setting gameplane from DOM
+var gamePlane = document.getElementById('gameplane');
 
 // Get the modal of end Game
 var modalEnd = document.getElementById('Modal-end');
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName('close')[0];
 // Get modal to insert name
-var modalName = document.getElementById("Modal-name");
-var name = document.getElementById("new-name");
+var modalName = document.getElementById('Modal-name');
+var name = document.getElementById('new-name');
 // Get namePlayer from DOM
 var namePlayer = document.getElementById('name-player');
 // Get video intro div from DOM
@@ -51,12 +50,17 @@ var videoIntro = document.getElementById('video-intro');
 // Get video intro element
 var videoIntroElement = document.getElementById('video1');
 
+//Get video End div from DOM
+var finalVideo = document.getElementById('video-end');
+//Get video End element
+var finalVideoElement = document.getElementById('video2');
+
+var musicBackground = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
 
 // IF Video Intro ends
-videoIntroElement.onended = function (e) {
+videoIntroElement.onended = function(e) {
 	startGame();
 };
-
 
 // EVENT CLICK START BUTTON
 startGameBtn.onclick = startGame;
@@ -65,11 +69,11 @@ startGameBtn.onclick = startGame;
 function startGame() {
 	console.log('start game yeah!');
 	playerName(); // Asking for the user's name
-	var musicBackground = new Audio('./Audio/02 - Main Theme - The Real Ghostbusters (DECO8) - Soundtrack - Arcade.mp3');
 	musicBackground.play(); //starts audio game
 	var points = 0;
 	videoIntro.style.display = 'none';
 	videoIntro.parentNode.removeChild(videoIntro);
+
 }
 
 //FUNCTION RESTART GAME
@@ -82,9 +86,9 @@ function restartGame() {
 
 // FUNCTION PLAYER NAME
 function playerName() {
-	modalName.style.display = "block";
+	modalName.style.display = 'block';
 	// Execute a function when the user releases a key on the keyboard
-	name.addEventListener("keyup", function (event) {
+	name.addEventListener('keyup', function(event) {
 		console.log('llegamos hasta aqui');
 		// Number 13 is the "Enter" key on the keyboard
 		if (event.keyCode === 13) {
@@ -95,17 +99,12 @@ function playerName() {
 			restartGame();
 		}
 	});
-
-
-
-
 }
 
 // Function to display Canvas
 function displayCanvas() {
 	theCanvas.style.display = 'block';
-};
-
+}
 
 // ========================================== ARTHUR =====================================================
 // ========================================== ARTHUR =====================================================
@@ -207,13 +206,12 @@ function resetAnimations() {
 var bgPos = 0; // variable that indicates the pixels to move the background. Initial 0
 
 function drawLoop() {
-	setTimeout(function () {
+	setTimeout(function() {
 		context.clearRect(0, 0, arthur.width, arthur.height);
 		requestAnimationFrame(drawLoop);
 		drawArthur();
 	}, 150);
 }
-
 
 // =========================================== ZOMBIE =====================================================
 // =========================================== ZOMBIE =====================================================
@@ -247,10 +245,9 @@ function zombiesinAction() {
 			this.zombieGoRight = 1;
 			this.ZombieDieLeft = 2;
 			this.ZombieDieRight = 3;
-			this.zombieImagen = zombieImage
+			this.zombieImagen = zombieImage;
 			this.zombieKilledImage = zombieExplosion;
 		}
-
 
 		//Function Update Frame
 		updateFrameZombie() {
@@ -285,18 +282,19 @@ function zombiesinAction() {
 				this.isCrashed = true;
 				console.log(this.isCrashed, 'colision!!!!!!');
 				// alert('You lose!!');
-				modalEnd.style.display = "block";
+				modalEnd.style.display = 'block';
 				// When the user clicks on <span> (x), close the modal
-				span.onclick = function () {
-					modalEnd.style.display = "none";
+				span.onclick = function() {
+					modalEnd.style.display = 'none';
+					finalVideo.parentNode.removeChild(finalVideo);
 					location.reload(true);
-				}
+				};
 				// When the user clicks anywhere outside of the modal, close it
-				window.onclick = function (event) {
+				window.onclick = function(event) {
 					if (event.target == modal) {
-						modalEnd.style.display = "none";
+						modalEnd.style.display = 'none';
 					}
-				}
+				};
 			}
 		}
 
@@ -311,7 +309,6 @@ function zombiesinAction() {
 			}
 		}
 
-
 		drawZombie() {
 			this.updateFrameZombie();
 			this.checkColision();
@@ -321,7 +318,17 @@ function zombiesinAction() {
 			// context.drawImage(zombieImage, this.zombieSrcX, this.zombieSrcY, 64, 64, this.x, this.y, this.width, this.height);
 			// zombieImage.onload = () => {
 			// console.log('image drawing');
-			context.drawImage(this.zombieImagen, this.zombieSrcX, this.zombieSrcY, this.width, this.height, this.x, this.y, this.width, this.height);
+			context.drawImage(
+				this.zombieImagen,
+				this.zombieSrcX,
+				this.zombieSrcY,
+				this.width,
+				this.height,
+				this.x,
+				this.y,
+				this.width,
+				this.height
+			);
 			// };
 		}
 
@@ -385,7 +392,7 @@ function zombiesinAction() {
 	}, 70);
 	// }
 
-	window.onkeydown = function (event) {
+	window.onkeydown = function(event) {
 		// console.log(event);
 
 		//Swith statement to know what key is pressed and to change the states with this
@@ -393,6 +400,9 @@ function zombiesinAction() {
 			case 39: //right key
 				// console.log('yay', event);
 				event.preventDefault();
+				if (bgPos == -6140) {
+					endingGame();
+				}
 				if (bgPos > -6140) {
 					bgPos -= 10;
 					background.style.backgroundPosition = bgPos + 'px';
@@ -433,4 +443,14 @@ function zombiesinAction() {
 				break;
 		}
 	};
-};
+
+	function endingGame() {
+		console.log('ENDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+		musicBackground.pause();
+		arthurScream = 0;
+		theCanvas.style.display = 'none';
+		finalVideo.style.display = 'block';
+		arthurImage = 0;
+		zombieImage = 0;
+	}
+}
